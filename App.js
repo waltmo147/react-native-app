@@ -8,71 +8,48 @@
 
 import React, { Component } from "react";
 import { StyleSheet, View } from "react-native";
+import { connect } from "react-redux";
 
 import DogInput from "./src/components/DogInput/DogInput";
 import DogList from "./src/components/DogList/DogList";
 import dogImage from "./src/assets/default_dog.jpg";
 import DogDetail from "./src/components/DogDetail/DogDetail";
 
-export default class App extends Component {
-  state = {
-    dogs: [],
-    selectedDog: null
-  };
+import {
+  addDog,
+  deleteDog,
+  selectDog,
+  deselectDog
+} from "./src/store/actions/index";
 
+class App extends Component {
   dogAddedHandler = dogName => {
-    this.setState(prevState => {
-      return {
-        dogs: prevState.dogs.concat({
-          key: Math.random(),
-          name: dogName,
-          image: {
-            uri:
-              "https://images.pexels.com/photos/39317/chihuahua-dog-puppy-cute-39317.jpeg?cs=srgb&dl=animal-chihuahua-cute-39317.jpg&fm=jpg"
-          }
-        })
-      };
-    });
+    this.props.onAddDog(dogName);
   };
 
   dogDeletedHandler = () => {
-    this.setState(prevState => {
-      return {
-        dogs: prevState.dogs.filter(dog => {
-          return dog.key !== prevState.selectedDog.key;
-        }),
-        selectedDog: null
-      };
-    });
+    this.props.onDeleteDog();
   };
 
   dogSelectedHandler = key => {
-    this.setState(prevState => {
-      return {
-        selectedDog: prevState.dogs.find(dog => {
-          return dog.key === key;
-        })
-      };
-    });
+    this.props.onSelectDog(key);
   };
 
   modalCloseHandler = () => {
-    this.setState({
-      selectedDog: null
-    });
+    this.props.onDeselectDog();
   };
 
   render() {
     return (
       <View style={styles.container}>
         <DogDetail
-          selectedDog={this.state.selectedDog}
+          selectedDog={this.props.selectedDog}
           onItemDeleted={this.dogDeletedHandler}
           onModalClosed={this.modalCloseHandler}
         />
         <DogInput onDogAdded={this.dogAddedHandler} />
         <DogList
-          dogs={this.state.dogs}
+          dogs={this.props.dogs}
           onItemSelected={this.dogSelectedHandler}
         />
       </View>
@@ -89,3 +66,24 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF"
   }
 });
+
+const mapStateToProps = state => {
+  return {
+    dogs: state.dogs.dogs,
+    selectedDog: state.dogs.selectedDog
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onAddDog: name => dispatch(addDog(name)),
+    onDeleteDog: () => dispatch(deleteDog()),
+    onSelectDog: key => dispatch(selectDog(key)),
+    onDeselectDog: () => dispatch(deselectDog())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
