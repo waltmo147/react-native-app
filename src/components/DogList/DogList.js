@@ -3,14 +3,14 @@ import { FlatList, StyleSheet } from "react-native";
 
 import ListItem from "../ListItem/ListItem";
 
-const placeList = props => {
+const dogList = props => {
   return (
     <FlatList
       style={styles.listContainer}
-      data={props.places}
+      data={props.dogs}
       renderItem={info => (
         <ListItem
-          placeName={info.item.value}
+          dogName={info.item.value}
           onItemPressed={() => props.onItemDeleted(info.item.key)}
         />
       )}
@@ -24,4 +24,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default placeList;
+export default dogList;

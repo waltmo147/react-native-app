@@ -1,37 +1,37 @@
 import React, { Component } from "react";
 import { View, TextInput, Button, StyleSheet } from "react-native";
 
-class PlaceInput extends Component {
+class DogInput extends Component {
   state = {
-    placeName: ""
+    dogName: ""
   };
 
-  placeNameChangedHandler = val => {
+  dogNameChangedHandler = val => {
     this.setState({
-      placeName: val
+      dogName: val
     });
   };
 
-  placeSubmitHandler = () => {
-    if (this.state.placeName.trim() === "") {
+  dogSubmitHandler = () => {
+    if (this.state.dogName.trim() === "") {
       return;
     }
-    this.props.onPlaceAdded(this.state.placeName);
+    this.props.onDogAdded(this.state.dogName);
   };
 
   render() {
     return (
       <View style={styles.inputContainer}>
         <TextInput
-          style={styles.placeInput}
-          value={this.state.placeName}
-          placeholder="An awesome place"
-          onChangeText={this.placeNameChangedHandler}
+          style={styles.dogInput}
+          value={this.state.dogName}
+          dogholder="Share your dog"
+          onChangeText={this.dogNameChangedHandler}
         />
         <Button
           title="Add"
-          style={styles.placeButton}
-          onPress={this.placeSubmitHandler}
+          style={styles.dogButton}
+          onPress={this.dogSubmitHandler}
         />
       </View>
     );
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center"
   },
-  placeInput: {
+  dogInput: {
     width: "70%"
   },
   plcaeButton: {
@@ -54,4 +54,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default PlaceInput;
+export default DogInput;

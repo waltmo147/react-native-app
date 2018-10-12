@@ -10,30 +10,30 @@ import React, { Component } from "react";
 import { StyleSheet, View } from "react-native";
 
 import ListItem from "./src/components/ListItem/ListItem";
-import PlaceInput from "./src/components/PlaceInput/PlaceInput";
-import PlaceList from "./src/components/PlaceList/PlaceList";
+import DogInput from "./src/components/DogInput/DogInput";
+import DogList from "./src/components/DogList/DogList";
 
 export default class App extends Component {
   state = {
-    places: []
+    dogs: []
   };
 
-  placeAddedHandler = placeName => {
+  dogAddedHandler = dogName => {
     this.setState(prevState => {
       return {
-        places: prevState.places.concat({
+        dogs: prevState.dogs.concat({
           key: Math.random(),
-          value: placeName
+          value: dogName
         })
       };
     });
   };
 
-  placeDeletedHandler = key => {
+  dogDeletedHandler = key => {
     this.setState(prevState => {
       return {
-        places: prevState.places.filter(place => {
-          return place.key !== key;
+        dogs: prevState.dogs.filter(dog => {
+          return dog.key !== key;
         })
       };
     });
@@ -42,10 +42,10 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <PlaceInput onPlaceAdded={this.placeAddedHandler} />
-        <PlaceList
-          places={this.state.places}
-          onItemDeleted={this.placeDeletedHandler}
+        <DogInput onDogAdded={this.dogAddedHandler} />
+        <DogList
+          dogs={this.state.dogs}
+          onItemDeleted={this.dogDeletedHandler}
         />
       </View>
     );
@@ -61,7 +61,3 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF"
   }
 });
-
-// export default App;
-
-// AppRegistry.registerComponent("reactProject", () => reactProject);

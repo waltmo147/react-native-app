@@ -6,7 +6,7 @@ const listItem = props => {
   return (
     <TouchableOpacity onPress={props.onItemPressed}>
       <View style={styles.listItem}>
-        <Text>{props.placeName}</Text>
+        <Text>{props.dogName}</Text>
       </View>
     </TouchableOpacity>
   );
