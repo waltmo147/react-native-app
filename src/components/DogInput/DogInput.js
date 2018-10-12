@@ -25,7 +25,7 @@ class DogInput extends Component {
         <TextInput
           style={styles.dogInput}
           value={this.state.dogName}
-          dogholder="Share your dog"
+          placeholder="Share your dog"
           onChangeText={this.dogNameChangedHandler}
         />
         <Button

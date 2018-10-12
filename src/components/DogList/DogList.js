@@ -10,8 +10,9 @@ const dogList = props => {
       data={props.dogs}
       renderItem={info => (
         <ListItem
-          dogName={info.item.value}
-          onItemPressed={() => props.onItemDeleted(info.item.key)}
+          dogName={info.item.name}
+          dogImage={info.item.image}
+          onItemPressed={() => props.onItemSelected(info.item.key)}
         />
       )}
     />
