@@ -1,1 +1,3 @@
-export { addDog, deleteDog, selectDog, deselectDog } from "./dogs";
+// bundle all the exports for actions
+
+export { addDog, deleteDog } from "./dogs";

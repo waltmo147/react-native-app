@@ -1,42 +1,13 @@
 import React, { Component } from "react";
 import { View, TextInput, Button, StyleSheet } from "react-native";
+import DefaultInput from '../UI/DefaultInput/DefaultInput';
 
-class DogInput extends Component {
-  state = {
-    dogName: ""
-  };
+const dogInput = props => (
+  <DefaultInput placeholder="Image name"
+    value={props.dogName}
+    onChangeText={props.onChangeText} />
 
-  dogNameChangedHandler = val => {
-    this.setState({
-      dogName: val
-    });
-  };
-
-  dogSubmitHandler = () => {
-    if (this.state.dogName.trim() === "") {
-      return;
-    }
-    this.props.onDogAdded(this.state.dogName);
-  };
-
-  render() {
-    return (
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.dogInput}
-          value={this.state.dogName}
-          placeholder="Share your dog"
-          onChangeText={this.dogNameChangedHandler}
-        />
-        <Button
-          title="Add"
-          style={styles.dogButton}
-          onPress={this.dogSubmitHandler}
-        />
-      </View>
-    );
-  }
-}
+);
 
 const styles = StyleSheet.create({
   inputContainer: {
@@ -54,4 +25,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default DogInput;
+export default dogInput;
