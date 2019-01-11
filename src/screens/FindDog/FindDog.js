@@ -1,13 +1,44 @@
 import React, { Component } from 'react';
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Animated } from "react-native";
 import { connect } from 'react-redux';
 import DogList from '../../components/DogList/DogList';
 
 
 class FindDogScreen extends Component {
+  static navigatorStyle = {
+    navBarButtonColor: 'orange'
+  }
+
+  state = {
+    dogsLoaded: false,
+    removeAnim: new Animated.Value(1),
+    dogsAnim: new Animated.Value(0)
+  }
+
   constructor(props) {
     super(props);
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
+  }
+
+  dogsLoadedHandler = () => {
+    Animated.timing(this.state.dogsAnim, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true
+    }).start();
+  }
+
+  dogsSearchHandler = () => {
+    Animated.timing(this.state.removeAnim, {
+      toValue: 0,
+      duration: 500,
+      useNativeDriver: true
+    }).start(() => {
+      this.setState({
+        dogsLoaded: true
+      });
+      this.dogsLoadedHandler();
+    });
   }
 
   onNavigatorEvent = event => {
@@ -34,15 +65,67 @@ class FindDogScreen extends Component {
   }
 
   render() {
+    let content = (
+      <Animated.View
+        style={{
+          opacity: this.state.removeAnim,
+          transform: [
+            {
+              scale: this.state.removeAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [12, 1]
+              })
+            }
+          ]
+        }}
+      >
+        <TouchableOpacity onPress={this.dogsSearchHandler}>
+          <View style={styles.searchButton}>
+            <Text style={styles.searchButtonText}>Find Dogs</Text>
+          </View>
+        </TouchableOpacity>
+      </Animated.View>
+    );
+    if (this.state.dogsLoaded) {
+      content = (
+        <Animated.View
+          style={{
+            opacity: this.state.dogsAnim,
+          }}
+        >
+          <DogList
+            dogs={this.props.dogs}
+            onItemSelected={this.itemSelectedHandler}
+          />
+        </Animated.View>
+      )
+    }
     return (
-      <View>
-        <DogList dogs={this.props.dogs} onItemSelected={this.itemSelectedHandler} />
+      <View style={this.state.dogsLoaded ? null : styles.buttonContainer}>
+        {content}
       </View>
     )
   }
 }
 
-
+const styles = StyleSheet.create({
+  buttonContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  searchButton: {
+    borderColor: "orange",
+    borderWidth: 3,
+    borderRadius: 50,
+    padding: 20
+  },
+  searchButtonText: {
+    color: "orange",
+    fontWeight: "bold",
+    fontSize: 26
+  }
+})
 const mapStateToProps = state => {
   return {
     dogs: state.dogs.dogs

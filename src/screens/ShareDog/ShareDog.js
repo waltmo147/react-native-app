@@ -11,6 +11,10 @@ import PickImage from '../../components/PickImage/PickImage';
 import PickLocation from '../../components/PickLocation/PickLocation';
 
 class ShareDogScreen extends Component {
+  static navigatorStyle = {
+    navBarButtonColor: 'orange'
+  }
+
   state = {
     dogName: ""
   };
