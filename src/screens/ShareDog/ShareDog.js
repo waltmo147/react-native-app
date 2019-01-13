@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ScrollView, Image } from "react-native";
+import { View, Text, TextInput, Button, StyleSheet, ScrollView, ActivityIndicator } from "react-native";
 import { connect } from 'react-redux';
 
 
@@ -9,19 +9,43 @@ import MainText from '../../components/UI/MainText/MainText';
 import HeadingText from '../../components/UI/HeadingText/HeadingText';
 import PickImage from '../../components/PickImage/PickImage';
 import PickLocation from '../../components/PickLocation/PickLocation';
+import validate from '../../utillity/validation'
 
 class ShareDogScreen extends Component {
   static navigatorStyle = {
     navBarButtonColor: 'orange'
   }
 
-  state = {
-    dogName: ""
-  };
-
   constructor(props) {
     super(props);
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
+  }
+
+  componentWillMount() {
+    this.reset();
+  }
+
+  reset = () => {
+    this.setState({
+      controls: {
+        dogName: {
+          value: "",
+          valid: false,
+          touched: false,
+          validationRules: {
+            notEmpty: true
+          }
+        },
+        location: {
+          value: null,
+          valid: false
+        },
+        image: {
+          value: null,
+          valid: false
+        }
+      }
+    })
   }
 
   onNavigatorEvent = event => {
@@ -35,40 +59,96 @@ class ShareDogScreen extends Component {
   }
 
   dogAddedHandler = () => {
-    if (this.state.dogName.trim(0 !== "")) {
-      this.props.onAddDog(this.state.dogName);
-    }
+    this.props.onAddDog(
+      this.state.controls.dogName.value,
+      this.state.controls.location.value,
+      this.state.controls.image.value,
+    );
+    reset();
+    this.imagePicker.reset();
   }
 
+
   dogNameChangedHandler = val => {
-    this.setState({
-      dogName: val
+    this.setState(prevState => {
+      return {
+        controls: {
+          ...prevState.controls,
+          dogName: {
+            ...prevState.controls.dogName,
+            value: val,
+            valid: validate(val, prevState.controls.dogName.validationRules),
+            touched: true
+          }
+        }
+      }
+    })
+
+  }
+
+  locationPickedHandler = location => {
+    this.setState(prevState => {
+      return {
+        controls: {
+          ...prevState.controls,
+          location: {
+            value: location,
+            valid: true
+          }
+        }
+      }
+    })
+  }
+
+  imagePickedHandler = image => {
+    this.setState(prevState => {
+      return {
+        controls: {
+          ...prevState.controls,
+          image: {
+            value: image,
+            valid: true
+          }
+        }
+      }
     })
   }
 
   render() {
+    let submitButton = (<Button
+      title="Share it !"
+      onPress={this.dogAddedHandler}
+      disabled={
+        !this.state.controls.dogName.valid ||
+        !this.state.controls.location.valid ||
+        !this.state.controls.image.valid
+      }
+    />);
+    if (this.props.isLoading) {
+      submitButton = <ActivityIndicator />
+    }
+
     return (
       <ScrollView>
         <View style={styles.container}>
-          <DogInput dogName={this.state.dogName} onChangeText={this.dogNameChangedHandler} />
           <MainText><HeadingText>Post your dog!</HeadingText></MainText>
-          <PickImage />
-          <PickLocation />
-
+          <PickImage
+            onImagePicked={this.imagePickedHandler}
+            ref={ref => this.imagePicker = ref}
+          />
+          <PickLocation onLocationPick={this.locationPickedHandler} />
+          <DogInput
+            dogData={this.state.controls.dogName}
+            onChangeText={this.dogNameChangedHandler}
+          />
           <View style={styles.button}>
-            <Button title="Share!" onPress={this.dogAddedHandler} />
+            {submitButton}
           </View>
         </View>
       </ScrollView>
     );
   }
 }
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onAddDog: (dogName) => dispatch(addDog(dogName))
-  };
-};
 
 const styles = StyleSheet.create({
   container: {
@@ -94,4 +174,16 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect(null, mapDispatchToProps)(ShareDogScreen);
+const mapStateToProps = state => {
+  return {
+    isLoading: state.ui.isLoading
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onAddDog: (dogName, location, image) => dispatch(addDog(dogName, location, image))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShareDogScreen);

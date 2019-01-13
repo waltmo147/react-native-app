@@ -16,11 +16,11 @@ Navigation.registerComponent("awesome-dogs.AuthScreen", () => AuthScreen, store,
 Navigation.registerComponent("awesome-dogs.ShareDogScreen", () => ShareDogScreen, store, Provider);
 Navigation.registerComponent("awesome-dogs.FindDogScreen", () => FindDogScreen, store, Provider);
 Navigation.registerComponent("awesome-dogs.DogDetailScreen", () => DogDetailScreen, store, Provider);
-Navigation.registerComponent("awesome-dogs.SideDrawer", () => SideDrawer);
+Navigation.registerComponent("awesome-dogs.SideDrawer", () => SideDrawer, store, Provider);
 
 
 // Start an App
-Navigation.startSingleScreenApp({
+export default () => Navigation.startSingleScreenApp({
   screen: {
     screen: "awesome-dogs.AuthScreen",
     title: "Login"

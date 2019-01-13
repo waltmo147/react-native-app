@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Animated } from "react-native";
 import { connect } from 'react-redux';
 import DogList from '../../components/DogList/DogList';
+import { getDogs } from '../../store/actions/index';
 
 
 class FindDogScreen extends Component {
@@ -18,6 +19,10 @@ class FindDogScreen extends Component {
   constructor(props) {
     super(props);
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
+  }
+
+  componentDidMount() {
+    this.props.onLoadDogs();
   }
 
   dogsLoadedHandler = () => {
@@ -132,4 +137,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(FindDogScreen);
+const mapDispatchToProps = dispatch => {
+  return {
+    onLoadDogs: () => dispatch(getDogs())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FindDogScreen);

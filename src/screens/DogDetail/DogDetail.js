@@ -11,7 +11,8 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { connect } from 'react-redux';
-import { deleteDog } from '../../store/actions/index'
+import { deleteDog } from '../../store/actions/index';
+import MapView from "react-native-maps";
 
 class DogDetail extends Component {
 
@@ -51,6 +52,17 @@ class DogDetail extends Component {
       >
         <View style={styles.subContainer}>
           <Image source={this.props.selectedDog.image} style={styles.dogImage} />
+        </View>
+        <View style={styles.subContainer}>
+          <MapView initialRegion={{
+            ...this.props.selectedDog.location,
+            latitudeDelta: 0.0122,
+            longitudeDelta: Dimensions.get("window").width
+              / Dimensions.get("window").height * 0.0122,
+          }}
+            style={styles.map}>
+            <MapView.Marker coordinate={this.props.selectedDog.location} />
+          </MapView>
         </View>
         <View style={styles.subContainer}>
           <View>
@@ -95,7 +107,10 @@ const styles = StyleSheet.create({
   },
   subContainer: {
     flex: 1
-  }
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject
+  },
 
 });
 

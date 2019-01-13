@@ -1,8 +1,8 @@
 // implementation for each reducers
 
 import {
-  ADD_DOG,
-  DELETE_DOG,
+  SET_DOGS,
+  REMOVE_DOG
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -11,25 +11,16 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_DOG:
-
-      // always return a new state, not changing the old state, because of the immutablility
+    case SET_DOGS:
       return {
         ...state,
-        dogs: state.dogs.concat({
-          key: Math.random(),
-          name: action.dogName,
-          image: {
-            uri:
-              "https://images.pexels.com/photos/39317/chihuahua-dog-puppy-cute-39317.jpeg?cs=srgb&dl=animal-chihuahua-cute-39317.jpg&fm=jpg"
-          }
-        })
+        dogs: action.dogs
       };
-    case DELETE_DOG:
+    case REMOVE_DOG:
       return {
         ...state,
         dogs: state.dogs.filter(dog => {
-          return dog.key !== action.dogKey;
+          return dog.key !== action.key;
         })
       };
     default:

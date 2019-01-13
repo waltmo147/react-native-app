@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "rn-dogsharing-1547249675796",
+  "private_key_id": "567d05c1bd8a35cc155ab3edc6a90521c1a98d90",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCq7PKH0HU4Tcx2\no4iXKDv3U+TBKMep/KMJtzX8+Jw3O8uF0OQGNhXKxLL7GHK9QdR4Q+WSLhA3HC3i\njPburfrCLwXodyDv/TOTz0x24r0duMEmUqYvGFznoKNld21lhqIxjMFhpw6SSG4B\neXZlc6D66LGSHTWZ5oPUpd+DN0HYTreqcqss5fWtAxFcq3X9IqHfdzX8c52351eu\njiLNNuTwGFUCTCHhhLU79JaQYEZ7xV81GViX+OpwoZ5lkIxevsPkMBCyM8LekQGw\nv+K0pdyIALTYuWCcQBHZdKvK0XpOf3FQhyV5vWSvodxC1VI0uynBb5j2a/q7ufwR\nX0gamJGnAgMBAAECggEAE6hS5PDB/Rrhcsba/NC5Q3gSsm5PYYrhxfUb+z8tBCMs\nhHQiOAlSAfMTnHzS0VZNVRQwm6+62K5fzpLPYWLWmII88op6L2+WK3UnV52QX2cx\n+4d81PoUe+UbIEkXEUU7HmoQNtFg2SJbAxtmKkPH604GAgZkSudabliHTKQhvqUa\nwWgnYVq62jDSdPoQQpIzV4rhQIZOQldoho2P6z3wp4oLQTtBPbvzXMz85CfYPG+V\nMKYvP4MiHdsa2CBYo7RwcC3BtzNpZ/jpFEBOkuhsPkJ46+/DZ7OkZieoQm1PJz1x\npSyesAmT0upV6F26y0PNteKw2qufWtk+kr17s+FCtQKBgQDeN5mrVWmaHRtfDn3Q\nxSnz+AyIUk4TeSrPU51d3i4CL6dBcKfQ5qxSGXuT9ubnBnK0d/ho90SEvjFtDiA/\nJqZ6GOjo99Q3CPNvFcOGrDDOao719Vh9V0cBqtM0uY1uQlBGhqJ8bRfjT2/gs8VL\n971JLaasiB/jOCxVPCea2mi9KwKBgQDE6SUtx3Y8qBrZNTO2H3vlEPQ87qy9TQHk\nytdHjBUZhWGRLGuM5nLLamvdZbQS4s3R4CaeCvIUOgTiga3U4RuYUTIFbjJaJcYF\n9NmKPDKJAW1bprMIKYtnWscVkttkd9sP9Tqucz17HAWkRH5PGs7qcYAiUL4oJu1m\n1+MyRhHXdQKBgDe7sDH1oR/DDxtfMhULbkM/Qj1qjyR5LlCDgyOI1vc7ZnKWQ7C0\nOiH5PDJXKYBl8JzsvgPtiGTWouTcNyA/nF9hIgFULwiCmTOSPNDpHPCYbzSnDUOa\ngTec1Y4Sv7MYtLOLjvMwFV6wjLnJvMEZ6IKTDYuWNJEzhIL4LGK9RqmzAoGBAKyH\nUwoPcCupZwzVrp9uapHEDxusTDH43SXoDEQmGv6nfVtDvmBQMljEwAnWaLb7fjbb\n3TowgPbz9v+3e+W/7vvAeMGFUhzmZ+EkLc8O+4BLfdQF9Wu7aud+BF2EtTIMSiZr\nSaU8V6wcW10YnksVRCLqm8h1Uoe/w9aOZgTQnCVZAoGAJlPqvizyufhObyzkwJqN\nEfZd2482nOsPA5pQqCmF0dbT8XIhPITZZYkix7Xa0e1vJjAdWffpPUD6VPzoKmM3\n5BvOk4YTQZDaSYtPeUVtepE6iY0sJVF/BUXgPX2KNIDGCmBE4/jZbaaYgcolMLBm\nh6YmvtxTnMmhPzlAEtr+0Lg=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-hd0jp@rn-dogsharing-1547249675796.iam.gserviceaccount.com",
+  "client_id": "107811717416485649582",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-hd0jp%40rn-dogsharing-1547249675796.iam.gserviceaccount.com"
+}

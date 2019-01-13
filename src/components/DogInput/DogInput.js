@@ -4,7 +4,9 @@ import DefaultInput from '../UI/DefaultInput/DefaultInput';
 
 const dogInput = props => (
   <DefaultInput placeholder="Image name"
-    value={props.dogName}
+    valid={props.dogData.valid}
+    value={props.dogData.value}
+    touched={props.dogData.touched}
     onChangeText={props.onChangeText} />
 
 );
